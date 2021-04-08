@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: stagingworkload-${BUILD_NUMBER}
+  name: stagingworkload-2
 spec:
   replicas: 5
   selector:
@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: rathihimanshu/jenkinsdev:${BUILD_NUMBER}
+        image: rathihimanshu/jenkinsdev:2
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: stagingworkloadservice-${BUILD_NUMBER}
+  name: stagingworkloadservice-2
 spec:
   ports:
     - name: http
