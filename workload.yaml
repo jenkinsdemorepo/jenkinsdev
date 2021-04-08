@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stagingworkload-${BUILD_NUMBER}
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: dev
+  template:
+    metadata:
+      labels:
+        app: dev
+    spec:
+      containers:
+      - name: nginx
+        image: rathihimanshu/jenkinsdev:${BUILD_NUMBER}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: stagingworkloadservice-${BUILD_NUMBER}
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: dev
+  type: LoadBalancer
